@@ -1,7 +1,6 @@
 import 'package:html/dom.dart';
-import 'model_to_string.dart';
 
-class Schedule with ModelToString {
+class Schedule {
   const Schedule({
     required this.year,
     required this.items,
@@ -57,9 +56,12 @@ class Schedule with ModelToString {
       items: items,
     );
   }
+
+  @override
+  String toString() => '$runtimeType(year: $year, items: $items)';
 }
 
-class ScheduleItem with ModelToString {
+class ScheduleItem {
   const ScheduleItem({
     required this.startDate,
     this.endDate,
@@ -69,4 +71,8 @@ class ScheduleItem with ModelToString {
   final DateTime startDate;
   final DateTime? endDate;
   final String content;
+
+  @override
+  String toString() =>
+      '$runtimeType(startDate: $startDate, endDate: $endDate, content: $content)';
 }

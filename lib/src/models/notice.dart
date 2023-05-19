@@ -1,8 +1,7 @@
 import 'package:html/dom.dart';
-import 'model_to_string.dart';
 import '../kmou_client.dart';
 
-class Notice with ModelToString {
+class Notice {
   const Notice({
     required this.isEmphaized,
     required this.title,
@@ -26,4 +25,8 @@ class Notice with ModelToString {
       createdAt: DateTime.parse(tds[3].innerHtml.replaceAll('.', '')),
     );
   }
+
+  @override
+  String toString() =>
+      '$runtimeType(isEmphaized: $isEmphaized, title: $title, uri: $uri, createdAt: $createdAt)';
 }

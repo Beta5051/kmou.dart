@@ -1,5 +1,4 @@
 import 'package:html/dom.dart';
-import 'model_to_string.dart';
 import '../kmou_client.dart';
 
 enum MealType {
@@ -8,7 +7,7 @@ enum MealType {
   staff, // 교직원 식당
 }
 
-class Meal with ModelToString {
+class Meal {
   const Meal({
     required this.type,
     required this.data,
@@ -47,9 +46,12 @@ class Meal with ModelToString {
       },
     );
   }
+
+  @override
+  String toString() => '$runtimeType(type: $type, data: $data)';
 }
 
-class BadaroMeal with ModelToString {
+class BadaroMeal {
   const BadaroMeal({
     required this.title,
     required this.uri,
@@ -71,4 +73,8 @@ class BadaroMeal with ModelToString {
           : null,
     );
   }
+
+  @override
+  String toString() =>
+      '$runtimeType(title: $title, uri: $uri, imageUri: $imageUri)';
 }
