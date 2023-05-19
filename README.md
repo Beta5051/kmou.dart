@@ -5,7 +5,7 @@
 ```yaml
 dependencies:
   kmou:
-    git: git@github.com:Beta5051/kmou.dart.git
+    git: https://github.com/Beta5051/kmou.dart.git
 ```
 
 ```dart
