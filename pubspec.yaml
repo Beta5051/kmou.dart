@@ -6,6 +6,6 @@ environment:
   sdk: '>=3.0.0 <4.0.0'
 
 dependencies:
-  html: ^0.15.2
-  http: ^0.13.6
+  html: ^0.15.3
+  http: ^1.0.0
   intl: ^0.18.1
