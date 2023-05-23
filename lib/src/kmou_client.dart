@@ -1,16 +1,47 @@
+import 'package:html/dom.dart';
+import 'package:html/parser.dart' as parser;
 import 'package:http/http.dart' as http;
 import 'package:intl/intl.dart';
-import 'base_client.dart';
 import 'models/models.dart';
 
-class KmouClient extends BaseClient {
+class KmouClient {
   static const baseUrl = 'https://www.kmou.ac.kr';
 
   KmouClient({http.Client? httpClient})
-      : super(
-          baseUrl: baseUrl,
-          httpClient: httpClient,
-        );
+      : _httpClient = httpClient ?? http.Client();
+
+  final http.Client _httpClient;
+
+  Future<Document> send(
+    String method,
+    String path, {
+    int? mi,
+    int? bbsId,
+    Map<String, dynamic> params = const {},
+  }) async {
+    final upperMethod = method.toUpperCase();
+    final query = ({
+      'mi': mi,
+      'bbsId': bbsId,
+      ...params,
+    }..removeWhere((key, value) => value == null))
+        .map((key, value) => MapEntry(key, '$value'));
+
+    final request = http.Request(
+      upperMethod,
+      upperMethod == 'GET'
+          ? Uri.parse(baseUrl + path).replace(queryParameters: query)
+          : Uri.parse(baseUrl + path),
+    );
+
+    if (upperMethod == 'POST') request.bodyFields = query;
+
+    final response = await _httpClient.send(request);
+
+    final body = await response.stream.bytesToString();
+
+    return parser.parse(body);
+  }
 
   Future<List<Notice>> getNotices({
     int page = 1,

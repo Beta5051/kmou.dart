@@ -48,33 +48,33 @@ class Meal {
   }
 
   @override
-  String toString() => '$runtimeType(type: $type, data: $data)';
+  String toString() => 'Meal(type: $type, data: $data)';
 }
 
 class BadaroMeal {
   const BadaroMeal({
     required this.title,
-    required this.uri,
-    required this.imageUri,
+    required this.url,
+    required this.imageUrl,
   });
 
   final String title;
-  final Uri uri;
-  final Uri? imageUri;
+  final String url;
+  final String? imageUrl;
 
   factory BadaroMeal.fromElement(Element element) {
     final imgs = element.getElementsByTagName('img');
 
     return BadaroMeal(
       title: element.getElementsByTagName('p')[0].innerHtml,
-      uri: Uri.parse(KmouClient.baseUrl + element.attributes['href']!),
-      imageUri: imgs.isNotEmpty
-          ? Uri.parse(KmouClient.baseUrl + imgs[0].attributes['src']!)
+      url: KmouClient.baseUrl + element.attributes['href']!,
+      imageUrl: imgs.isNotEmpty
+          ? KmouClient.baseUrl + imgs[0].attributes['src']!
           : null,
     );
   }
 
   @override
   String toString() =>
-      '$runtimeType(title: $title, uri: $uri, imageUri: $imageUri)';
+      'BadaroMeal(title: $title, url: $url, imageUrl: $imageUrl)';
 }

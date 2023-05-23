@@ -58,7 +58,7 @@ class Schedule {
   }
 
   @override
-  String toString() => '$runtimeType(year: $year, items: $items)';
+  String toString() => 'Schedule(year: $year, items: $items)';
 }
 
 class ScheduleItem {
@@ -74,5 +74,5 @@ class ScheduleItem {
 
   @override
   String toString() =>
-      '$runtimeType(startDate: $startDate, endDate: $endDate, content: $content)';
+      'ScheduleItem(startDate: $startDate, endDate: $endDate, content: $content)';
 }
